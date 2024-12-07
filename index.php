@@ -1,10 +1,19 @@
 <?php
 require_once './config/config.php';
-require_once APP_ROOT.'/services/CategoryService.php';
+//require_once APP_ROOT.'/controllers/HomeController.php';
 
-$categoryService = new CategoryService();
-$categories = $categoryService->getAllCategories();
+//$homeController = new HomeController();
+//$homeController->index();
 
-echo "<pre>";
-print_r($categories);
-echo "</pre>";
+$controller = isset($_GET['controller']) ? $_GET['controller'] : 'home';
+$action = isset($_GET['action']) ? $_GET['action'] : 'index';
+
+if ($controller == 'home') {
+    require_once APP_ROOT.'/controllers/HomeController.php';
+    $homeController = new HomeController();
+    $homeController->index();
+}else if ($action == 'new') {
+    require_once APP_ROOT.'/controllers/NewsController.php';
+    $newController = new NewsController();
+    $newController->detail();
+}
