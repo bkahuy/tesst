@@ -41,6 +41,9 @@
                 <li class="nav-item"><a class="nav-link" href="#" onclick="filterArticles('entertainment')">Giải trí</a></li>
             </ul>
         </div>
+        <div>
+            <a href="/tesst/views/admin/login.php" class="btn btn-primary">Log In</a>
+        </div>
     </div>
 </nav>
 
