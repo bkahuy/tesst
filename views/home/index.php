@@ -1,5 +1,4 @@
 <?php
-
 ?>
 
 <!DOCTYPE html>
@@ -14,6 +13,13 @@
         .nav-link.default-active {
             font-size: 1rem;
             font-weight: bold;
+        }
+        .card-text {
+            display: -webkit-box;
+            -webkit-line-clamp: 1;     /* Hiển thị tối đa 2 dòng */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
     </style>
 </head>
@@ -48,93 +54,28 @@
 </nav>
 
 <div class="container my-4">
-    <div class="row" id="newsContainer">
-        <!-- Article 1 -->
-        <div class="col-md-6 col-lg-4 news-card my-2" data-category="sports">
-            <div class="card shadow-sm">
-                <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="News Image">
-                <div class="card-body">
-                    <h5 class="card-title text-truncate">Sports Update: Big Win Today</h5>
-                    <p class="card-text text-truncate">Curabitur ac leo nunc. Vestibulum et mauris vel ante...</p>
-                    <a href="#" class="btn btn-primary btn-sm">Read More</a>
+    <div class="row">
+        <!-- Articles Section -->
+        <div class="col-md-12">
+            <div class="row g-4">
+                <!-- Article 1 -->
+                <?php
+                    foreach($news as $new) {
+                ?>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card news-card shadow-sm">
+                        <img src="<?= $new->getImage();?>" class="card-img-top" alt="News Image">
+                        <div class="card-body">
+                            <h5 class="card-title"> <?= $new->getTitle(); ?> </h5>
+                            <p class="card-text"><?=$new->getContent(); ?></p>
+                            <a href="#" class="btn btn-primary btn-sm">Read More</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <!-- Article 2 -->
-        <div class="col-md-6 col-lg-4 news-card my-2" data-category="tech">
-            <div class="card shadow-sm">
-                <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="News Image">
-                <div class="card-body">
-                    <h5 class="card-title text-truncate">Tech World: AI is Revolutionizing</h5>
-                    <p class="card-text text-truncate">Mauris lacinia sapien quis libero. Praesent id justo...</p>
-                    <a href="#" class="btn btn-primary btn-sm">Read More</a>
-                </div>
-            </div>
-        </div>
-        <!-- Article 3 -->
-        <div class="col-md-6 col-lg-4 news-card my-2" data-category="entertainment">
-            <div class="card shadow-sm">
-                <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="News Image">
-                <div class="card-body">
-                    <h5 class="card-title text-truncate">Entertainment: Movie of the Year</h5>
-                    <p class="card-text text-truncate">Donec vitae dolor. Integer euismod lacus luctus...</p>
-                    <a href="#" class="btn btn-primary btn-sm">Read More</a>
-                </div>
-            </div>
-        </div>
-        <!-- Article 4 -->
-        <div class="col-md-6 col-lg-4 news-card my-2" data-category="sports">
-            <div class="card shadow-sm">
-                <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="News Image">
-                <div class="card-body">
-                    <h5 class="card-title text-truncate">Sports News: Star Player Shines</h5>
-                    <p class="card-text text-truncate">Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
-                    <a href="#" class="btn btn-primary btn-sm">Read More</a>
-                </div>
-            </div>
-        </div>
-        <!-- Article 5 -->
-        <div class="col-md-6 col-lg-4 news-card my-2" data-category="tech">
-            <div class="card shadow-sm">
-                <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="News Image">
-                <div class="card-body">
-                    <h5 class="card-title text-truncate">Tech Innovations: What's New?</h5>
-                    <p class="card-text text-truncate">Donec vitae dolor. Integer euismod lacus luctus...</p>
-                    <a href="#" class="btn btn-primary btn-sm">Read More</a>
-                </div>
-            </div>
-        </div>
-        <!-- Article 6 -->
-        <div class="col-md-6 col-lg-4 news-card my-2" data-category="tech">
-            <div class="card shadow-sm">
-                <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="News Image">
-                <div class="card-body">
-                    <h5 class="card-title text-truncate">Tech Innovations: What's New?</h5>
-                    <p class="card-text text-truncate">Donec vitae dolor. Integer euismod lacus luctus...</p>
-                    <a href="#" class="btn btn-primary btn-sm">Read More</a>
-                </div>
-            </div>
-        </div>
-        <!-- Article 7 -->
-        <div class="col-md-6 col-lg-4 news-card my-2" data-category="tech">
-            <div class="card shadow-sm">
-                <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="News Image">
-                <div class="card-body">
-                    <h5 class="card-title text-truncate">Tech World: AI is Revolutionizing</h5>
-                    <p class="card-text text-truncate">Mauris lacinia sapien quis libero. Praesent id justo...</p>
-                    <a href="#" class="btn btn-primary btn-sm">Read More</a>
-                </div>
-            </div>
-        </div>
-        <!-- Article 8 -->
-        <div class="col-md-6 col-lg-4 news-card my-2" data-category="sports">
-            <div class="card shadow-sm">
-                <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="News Image">
-                <div class="card-body">
-                    <h5 class="card-title text-truncate">Sports News: Star Player Shines</h5>
-                    <p class="card-text text-truncate">Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
-                    <a href="#" class="btn btn-primary btn-sm">Read More</a>
-                </div>
+                <?php
+                    }
+                ?>
+
             </div>
         </div>
     </div>
