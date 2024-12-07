@@ -1,5 +1,4 @@
 <?php
-
 ?>
 
 <!DOCTYPE html>
@@ -17,6 +16,13 @@
         .news-card img {
             height: 200px;
             object-fit: cover;
+        }
+        .card-text {
+            display: -webkit-box;
+            -webkit-line-clamp: 1;     /* Hiển thị tối đa 2 dòng */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
     </style>
 </head>
@@ -36,71 +42,23 @@
         <div class="col-md-12">
             <div class="row g-4">
                 <!-- Article 1 -->
+                <?php
+                    foreach($news as $new) {
+                ?>
                 <div class="col-md-6 col-lg-4">
                     <div class="card news-card shadow-sm">
-                        <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="News Image">
+                        <img src="<?= $new->getImage();?>" class="card-img-top" alt="News Image">
                         <div class="card-body">
-                            <h5 class="card-title">Breaking News: Major Event Happened</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+                            <h5 class="card-title"> <?= $new->getTitle(); ?> </h5>
+                            <p class="card-text"><?=$new->getContent(); ?></p>
                             <a href="#" class="btn btn-primary btn-sm">Read More</a>
                         </div>
                     </div>
                 </div>
-                <!-- Article 2 -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="card news-card shadow-sm">
-                        <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="News Image">
-                        <div class="card-body">
-                            <h5 class="card-title">Sports Update: Big Win Today</h5>
-                            <p class="card-text">Curabitur ac leo nunc. Vestibulum et mauris vel ante...</p>
-                            <a href="#" class="btn btn-primary btn-sm">Read More</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Article 3 -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="card news-card shadow-sm">
-                        <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="News Image">
-                        <div class="card-body">
-                            <h5 class="card-title">Tech World: AI is Revolutionizing</h5>
-                            <p class="card-text">Mauris lacinia sapien quis libero. Praesent id justo...</p>
-                            <a href="#" class="btn btn-primary btn-sm">Read More</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Article 4 -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="card news-card shadow-sm">
-                        <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="News Image">
-                        <div class="card-body">
-                            <h5 class="card-title">World News: Diplomatic Talks</h5>
-                            <p class="card-text">Nulla facilisi. Sed magna enim, consequat at...</p>
-                            <a href="#" class="btn btn-primary btn-sm">Read More</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Article 5 -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="card news-card shadow-sm">
-                        <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="News Image">
-                        <div class="card-body">
-                            <h5 class="card-title">Entertainment: Movie of the Year</h5>
-                            <p class="card-text">Donec vitae dolor. Integer euismod lacus luctus...</p>
-                            <a href="#" class="btn btn-primary btn-sm">Read More</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Article 6 -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="card news-card shadow-sm">
-                        <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="News Image">
-                        <div class="card-body">
-                            <h5 class="card-title">Economy: Market Trends Today</h5>
-                            <p class="card-text">Nam quis nulla. Integer malesuada. In in enim a...</p>
-                            <a href="#" class="btn btn-primary btn-sm">Read More</a>
-                        </div>
-                    </div>
-                </div>
+                <?php
+                    }
+                ?>
+
             </div>
         </div>
     </div>
