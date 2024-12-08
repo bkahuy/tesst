@@ -70,8 +70,10 @@
             <div class="row g-4">
                 <?php
                     foreach($news as $new) {
+                        foreach ($categories as $category) {
                 ?>
-                <div class="col-md-6 col-lg-4 news-card" data-category="<?= $new->category_name; ?>">
+
+                <div class="col-md-6 col-lg-4 news-card" data-category="<?= $category->getName(); ?>">
                     <div class="card news-card shadow-sm">
                         <div class="image-wrapper">
                             <img src="<?= $new->getImage();?>" class="card-img-top img-fluid img-cropped" alt="News Image">
@@ -84,6 +86,7 @@
                     </div>
                 </div>
                 <?php
+                        }
                     }
                 ?>
 
