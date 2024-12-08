@@ -33,10 +33,6 @@
 <body>
 <div class="login-container">
     <h3>Đăng Nhập</h3>
-    <form method="POST" action="index.php?controller=user&action=login">
-        <?php if (isset($error)): ?>
-            <p style="color: red;"><?php echo $error; ?></p>
-        <?php endif; ?>
         <div class="mb-3">
             <label for="username" class="form-label">Tên tài khoản</label>
             <input type="text" class="form-control" name="username" placeholder="Username" required>
@@ -46,11 +42,11 @@
             <input type="password" class="form-control" name="password" placeholder="Password" required>
         </div>
         <div class="d-grid">
-            <button class="btn btn-primary" type="submit" value="login">Đăng nhập</button>
+<!--            <a href="--><?php //= DOMAIN . '?controller=admin' ?><!--" class="login-container">DANG NHAP</a>-->
+            <a href="../../views/admin/news/index.php" class="btn btn-primary">Đăng nhập</a>
         </div>
         <div class="mt-3 text-center">
         </div>
-    </form>
 </div>
 
 <!-- Bootstrap JS -->

@@ -40,26 +40,6 @@ class NewsService{
         }
     }
 
-    public function getNewsByCateId($id){
-        $dbConnection = new DBConnection();
-        $conn = $dbConnection->getConn();
-        if($conn != null) {
-            $sql = "SELECT news.*, categories.name AS category_name 
-                    FROM news 
-                    INNER JOIN categories 
-                    ON news.category_id = categories.id
-                    WHERE news.category_id = :id";
-            $stmt = $conn->prepare($sql);
-            $stmt->bindParam(':id', $id);
-            $stmt->execute();
-            $newsbyid = [];
-            while ($row = $stmt->fetch()) {
-                $newbyid = new News($row['id'], $row['title'], $row['content'], $row['image'], $row['created_at'], $row['category_name']);
-                $newsbyid[] = $newbyid;
-            }
-            return $newsbyid;
-        }
-    }
 
     public function searchNews($keyword)
     {
@@ -90,7 +70,7 @@ class NewsService{
             return $newsResults;
         }
 
-//        return [];
+        return [];
     }
 
 }

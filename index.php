@@ -20,5 +20,10 @@ else if ($controller == 'newsearch') {
     $newController = new NewsController();
     $newController->search();
 }
+else if ($controller == 'admin') {
+    require_once APP_ROOT . '/controllers/AdminController.php';
+    $homeController = new AdminController();
+    $homeController->admin();
+}
 
 

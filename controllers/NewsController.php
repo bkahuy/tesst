@@ -7,6 +7,7 @@ class NewsController{
         $newsbyid = $newService->getNewsById($_GET['id']);
         //render du lieu ra homepage
         include APP_ROOT.'/views/News/detail.php';
+
     }
 
     // Xử lý tìm kiếm tin tức
