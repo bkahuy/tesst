@@ -1,6 +1,3 @@
-<?php
-
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,10 +14,22 @@
         }
         .card-text {
             display: -webkit-box;
-            -webkit-line-clamp: 1;     /* Hiển thị tối đa 2 dòng */
+            -webkit-line-clamp: 1;
             -webkit-box-orient: vertical;
             overflow: hidden;
             text-overflow: ellipsis;
+        }
+
+        .image-wrapper {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .img-cropped {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
     </style>
 </head>
@@ -59,13 +68,14 @@
         <!-- Articles Section -->
         <div class="col-md-12">
             <div class="row g-4">
-                <!-- Article 1 -->
                 <?php
                     foreach($news as $new) {
                 ?>
-                <div class="col-md-6 col-lg-4">
+                <div class="col-md-6 col-lg-4 news-card" data-category="<?= $new->category_name; ?>">
                     <div class="card news-card shadow-sm">
-                        <img src="<?= $new->getImage();?>" class="card-img-top" alt="News Image">
+                        <div class="image-wrapper">
+                            <img src="<?= $new->getImage();?>" class="card-img-top img-fluid img-cropped" alt="News Image">
+                        </div>
                         <div class="card-body">
                             <h5 class="card-title"> <?= $new->getTitle(); ?> </h5>
                             <p class="card-text"><?=$new->getContent(); ?></p>
@@ -92,31 +102,30 @@
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    function filterArticles(category) {
-        const articles = document.querySelectorAll('.news-card');
-        articles.forEach(article => {
-            if (category === 'all' || article.getAttribute('data-category') === category) {
-                article.style.display = 'block';
+    const filterArticles = (category) => {
+        const cards = document.querySelectorAll('.news-card');
+        cards.forEach(card => {
+            if (category === 'all' || card.dataset.category === category) {
+                card.style.display = 'block';
             } else {
-                article.style.display = 'none';
+                card.style.display = 'none';
             }
         });
-    }
+    };
 
     const navLinks = document.querySelectorAll('.nav-link');
 
     navLinks.forEach(link => {
         link.addEventListener('click', function () {
-            // Remove inline style and default class from all links
             navLinks.forEach(nav => {
                 nav.style.fontSize = '';
                 nav.style.fontWeight = '';
-                nav.classList.remove('default-active'); // Xóa trạng thái mặc định
+                nav.classList.remove('default-active');
             });
 
             // Add style to clicked link
-            this.style.fontSize = '1rem'; // To hơn
-            this.style.fontWeight = 'bold'; // Đậm hơn
+            this.style.fontSize = '1rem';
+            this.style.fontWeight = 'bold';
         });
     });
 </script>

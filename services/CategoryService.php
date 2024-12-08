@@ -18,5 +18,20 @@ class CategoryService{
             }
             return $categories;
         }
+
+        // Truy vấn dữ liệu với JOIN
+        $sql = "SELECT news.*, categories.name AS category_name 
+        FROM news 
+        INNER JOIN categories ON news.category_id = categories.id";
+
+        $result = $db->query($sql);
+        $news = [];
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_object()) {
+                $news[] = $row;
+            }
+        }
+
+
     }
 }
