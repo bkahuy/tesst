@@ -10,6 +10,9 @@
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        header {
+            z-index: 100;
+        }
         body {
             display: flex;
             flex-direction: column;
@@ -47,15 +50,16 @@
             margin: 0px 18.25rem;
         }
         .search-btn {
-            width: 150px;
+            width: 60px;
+            text-align: center;
         }
         .searchNews {
             margin-bottom: 0;
             align-self: center;
             margin-left: 3px;
         }
-        .search{
-            margin-bottom: 0;
+        .search-input {
+            width: 250px;
         }
     </style>
 </head>
@@ -64,7 +68,7 @@
 <!-- Header -->
 <header class="bg-primary text-white py-3">
     <div class="container text-center">
-        <h1>Lều Báo</h1>
+        <h1><a href="<?= DOMAIN; ?>" class="text-white text-decoration-none">Lều Báo</a></h1>
         <p>Những tin tức mới giật gân</p>
     </div>
 </header>
@@ -75,12 +79,12 @@
 
             <form class="d-flex mx-2" role="search" method="GET" action="">
                 <label for="keyword" class="visually-hidden">Tìm kiếm:</label>
-                <input class="form-control me-2" type="text" placeholder="Tìm kiếm..." id="keyword" name="keyword">
+                <input class="form-control me-2 search-input" type="text" placeholder="Ấn Tìm trước rồi mới Kiếm..." id="keyword" name="keyword">
                 <?php
                 $keyword = $_GET['keyword'] ?? '';
                 ?>
-                <button type="submit" class="btn btn-primary">Lưu</button>
-                <a href="<?= DOMAIN . '?controller=newsearch&keyword=' . $keyword ?>" class="btn btn-primary d-flex rounded-1 search-btn searchNews">Đi</a>
+                <button type="submit" class="btn btn-primary search-btn">Tìm</button>
+                <a href="<?= DOMAIN . '?controller=newsearch&keyword=' . $keyword ?>" class="btn btn-primary d-flex search-btn searchNews">Kiếm</a>
 
             </form>
         <div class="container d-flex justify-content-end"">
@@ -130,9 +134,9 @@
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script>
 
 
-
-
+</script>
 </body>
 </html>
