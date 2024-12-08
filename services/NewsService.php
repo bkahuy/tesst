@@ -60,4 +60,37 @@ class NewsService{
             return $newsbyid;
         }
     }
+
+    public function searchNews($keyword)
+    {
+        $dbConnection = new DBConnection();
+        $conn = $dbConnection->getConn();
+
+        if ($conn != null) {
+            // SQL query tìm kiếm tin tức theo tiêu đề hoặc nội dung
+            // Chuẩn bị câu lệnh SQL
+            $sql = "SELECT * FROM news WHERE title LIKE :keyword OR content LIKE :keyword";
+
+            // Chuẩn bị câu lệnh truy vấn
+            $stmt = $conn->prepare($sql);
+
+            // Gán giá trị cho tham số :keyword
+            $stmt->bindValue(':keyword', '%' . $keyword . '%');
+
+            // Thực thi truy vấn
+            $stmt->execute();
+
+            // Lấy tất cả các kết quả và đẩy vào mảng
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $newResults = new News($row['id'], $row['title'], $row['content'], $row['image'], $row['created_at'], $row['category_id'] );
+                $newsResults[] = $newResults;
+            }
+
+            // Trả về kết quả tìm kiếm
+            return $newsResults;
+        }
+
+//        return [];
+    }
+
 }

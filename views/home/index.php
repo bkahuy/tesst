@@ -1,4 +1,6 @@
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,13 +72,17 @@
 <!-- Navigation Bar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-around">
     <div class="d-flex justify-content-around div-nav">
-        <?php
-        $keyword = isset($_GET['keyword']) ? htmlspecialchars($_GET['keyword']) : '';
-        ?>
-        <form class="d-flex mx-2" role="search" method="GET">
-        <input class="form-control me-2" type="search" placeholder="Tìm kiếm..." value="<?php echo $keyword; ?>" name="keyword">
-        <button type="submit" href="#" class="btn btn-primary d-flex rounded-1 search-btn searchNews" value="searchNews"><p class="search">Tìm kiếm</p></button>
-        </form>
+
+            <form class="d-flex mx-2" role="search" method="GET" action="">
+                <label for="keyword" class="visually-hidden">Tìm kiếm:</label>
+                <input class="form-control me-2" type="text" placeholder="Tìm kiếm..." id="keyword" name="keyword">
+                <?php
+                $keyword = $_GET['keyword'] ?? '';
+                ?>
+                <button type="submit" class="btn btn-primary">Lưu</button>
+                <a href="<?= DOMAIN . '?controller=newsearch&keyword=' . $keyword ?>" class="btn btn-primary d-flex rounded-1 search-btn searchNews">Đi</a>
+
+            </form>
         <div class="container d-flex justify-content-end"">
             <div>
                 <a href="<?= DOMAIN.'views/admin/login.php' ?>" class="btn btn-primary d-flex mx-2 rounded-1"">Đăng nhập</a>
@@ -85,6 +91,7 @@
     </div>
 
 </nav>
+
 
 <div class="container my-4">
     <div class="row">
@@ -122,6 +129,10 @@
 </footer>
 
 <!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+
+
+
 </body>
 </html>
