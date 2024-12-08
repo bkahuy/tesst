@@ -1,39 +1,49 @@
-<!-- views/news/search.php -->
-
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tìm kiếm Tin Tức</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <title>Document</title>
 </head>
 <body>
+<form method="POST" action="">
+    <h1>Search</h1>
+<div class="modal-body" id="searchResults">
+                <!-- Nội dung tìm kiếm sẽ được hiển thị ở đây -->
+                <div class="container mt-5">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- Article Card -->
+                            <?php
+                            foreach($newsResults as $newResults) {
+                                ?>
+                                <div class="card shadow-sm">
+                                    <!-- Article Image -->
+                                    <img src="<?= $newResults->getImage(); ?>" class="card-img-top" alt="Hình ảnh bài báo">
 
-<div class="container mt-5">
-    <h3 class="mb-4">Kết quả tìm kiếm cho: "<?php echo htmlspecialchars($keyword); ?>"</h3>
+                                    <!-- Article Body -->
+                                    <div class="card-body">
+                                        <!-- Title -->
+                                        <h2 class="card-title"><?= $newResults->getTitle();?></h2>
 
-    <div class="row">
-        <?php if (!empty($searchResults)): ?>
-            <?php foreach ($searchResults as $news): ?>
-                <div class="col-md-4 d-flex align-items-stretch my-3">
-                    <div class="card shadow-sm">
-                        <img src="https://via.placeholder.com/800x300" alt="<?php echo htmlspecialchars($news['title']); ?>" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title"><?php echo htmlspecialchars($news['title']); ?></h5>
-                            <p class="card-text"><?php echo htmlspecialchars($news['content']); ?></p>
-                            <a href="<?=DOMAIN?>?action=viewNews&id=<?php echo $news['id']; ?>" class="btn btn-primary">Chi tiết</a>
+                                        <!-- Category and Date -->
+                                        <p class="text-muted">
+                                            <span>Danh mục: <?= $newResults->getCategoryName();?></span> |
+                                            <span>Ngày tạo: <?= $newResults->getCreatedAt();?></span>
+                                        </p>
+
+                                        <!-- Content -->
+                                        <p class="card-text"><?= $newResults->getContent();?></p>
+                                    </div>
+                                </div>
+                                <?php
+                                }
+                            ?>
                         </div>
                     </div>
                 </div>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <p>Không có kết quả tìm kiếm nào.</p>
-        <?php endif; ?>
-    </div>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+            </div>
+</form>
 </body>
 </html>
-

@@ -15,21 +15,10 @@ else if ($controller == 'new') {
     $newController = new NewsController();
     $newController->detail();
 }
-else if ($controller == 'user') {
-    require_once APP_ROOT . '/controllers/AdminController.php';
-    $userController = new AdminController();
+else if ($controller == 'newsearch') {
+    require_once APP_ROOT.'/controllers/NewsController.php';
+    $newController = new NewsController();
+    $newController->search();
 }
-     if ($action == 'registerForm') {
-        $userController->registerForm();
-    }
-else if ($action == 'register') {
-        $userController->register();
-    }
-else if ($action == 'loginForm') {
-        $userController->loginForm();
-    }
-else if ($action == 'login') {
-        $userController->login();
-    }
 
 
