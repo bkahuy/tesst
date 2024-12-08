@@ -70,10 +70,8 @@
             <div class="row g-4">
                 <?php
                     foreach($news as $new) {
-                        foreach ($categories as $category) {
                 ?>
-
-                <div class="col-md-6 col-lg-4 news-card" data-category="<?= $category->getName(); ?>">
+                <div class="col-md-6 col-lg-4">
                     <div class="card news-card shadow-sm">
                         <div class="image-wrapper">
                             <img src="<?= $new->getImage();?>" class="card-img-top img-fluid img-cropped" alt="News Image">
@@ -81,13 +79,12 @@
                         <div class="card-body">
                             <h5 class="card-title"> <?= $new->getTitle(); ?> </h5>
                             <p class="card-text"><?=$new->getContent(); ?></p>
-                            <a href="<?= DOMAIN.'?controller=new&id='.$new->getId().';'?>" class="btn btn-primary btn-sm">Read More</a>
+                            <a href="<?= DOMAIN.'?controller=new&id=' . $new->getId() . ';'?>" class="btn btn-primary btn-sm">Xem chi tiết</a>
                         </div>
                     </div>
                 </div>
                 <?php
                         }
-                    }
                 ?>
 
             </div>
