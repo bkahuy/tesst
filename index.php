@@ -7,15 +7,15 @@ require_once APP_ROOT.'/libs/DBConnection.php';
 //$homeController->index();
 
 $controller = $_GET['controller'] ?? 'home';
-$action = $_GET['action'] ?? 'index';
+//$action = $_GET['action'] ?? 'index';
 
 if ($controller == 'home') {
     require_once APP_ROOT.'/controllers/HomeController.php';
     $homeController = new HomeController();
     $homeController->index();
 }
-//else if ($action == 'new') {
-//    require_once APP_ROOT.'/controllers/NewsController.php';
-//    $newController = new NewsController();
-//    $newController->detail();
-//}
+else if ($controller == 'new') {
+    require_once APP_ROOT.'/controllers/NewsController.php';
+    $newController = new NewsController();
+    $newController->detail();
+}
