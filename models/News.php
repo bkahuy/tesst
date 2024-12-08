@@ -88,5 +88,12 @@ class News{
         $this->category_id = $category_id;
     }
 
+    public function searchNews($keyword)
+    {
+        $sql = "SELECT * FROM news WHERE title LIKE :keyword OR content LIKE :keyword";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['keyword' => '%' . $keyword . '%']);
+        return $stmt->fetchAll();
+    }
 
 }

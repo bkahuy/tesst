@@ -17,6 +17,19 @@
         <h1 class="mb-0">Chi Tiết Bài Báo</h1>
     </div>
 </header>
+<style>
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        margin: 0;
+    }
+
+    footer {
+        margin-top: auto;
+        padding: 10px 0;
+    }
+</style>
 
 <!-- Main Content -->
 <div class="container mt-5">
@@ -53,9 +66,9 @@
 </div>
 
 <!-- Footer -->
-<footer class="bg-dark text-white text-center py-3 mt-5">
+<footer class="bg-dark text-white text-center pt-3 mt-auto">
     <div class="container">
-        <p class="mb-0">&copy; <?php echo date("Y"); ?> Bài Báo. All Rights Reserved.</p>
+        <p>BTTH2 - Bùi Khắc Huy, Nguyễn Thành Đồng, Trần Tiến Đạt.</p>
     </div>
 </footer>
 
