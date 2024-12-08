@@ -2,8 +2,6 @@
 
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +27,7 @@
             overflow: hidden;
         }
         #sidebar.active {
-            min-width: 80px;
+            min-width: 60px;
             max-width: 80px;
         }
         #sidebar.active .nav-link span {
@@ -41,7 +39,7 @@
         }
         #sidebar .nav-link {
             color: #fff;
-            padding: 10px 15px;
+            padding: 10px 20px;
             white-space: nowrap; /* Ngăn text bị xuống dòng */
         }
         #sidebar .nav-link i {
@@ -59,9 +57,6 @@
             transition: margin-left 0.3s ease;
             width: 100%;
         }
-        #sidebar.active + #content {
-            margin-left: 80px;
-        }
         #toggle-btn {
             cursor: pointer;
             color: #fff;
@@ -77,31 +72,23 @@
     <!-- Sidebar -->
     <nav id="sidebar" class="bg-dark">
         <div class="p-3 d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Admin Dashboard</h5>
+            <h5 class="mb-0">Bảng điều khiển Quản trị viên</h5>
             <span id="toggle-btn">
                     <i class="bi bi-list"></i>
                 </span>
         </div>
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="bi bi-people"></i> <span>Manage Users</span>
-                </a>
+                <a href="add.php" class="nav-link" data-bs-toggle="tab"><i class="bi bi-newspaper"></i> <span>Thêm bài viết</span></a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="bi bi-newspaper"></i> <span>News Management</span>
-                </a>
+                <a href="edit.php" class="nav-link" data-bs-toggle="tab"><i class="bi bi-pencil"></i> <span>Sửa bài viết</span></a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="bi bi-gear"></i> <span>Settings</span>
-                </a>
+                <a href="delete.php" class="nav-link" data-bs-toggle="tab"><i class="bi bi-trash"></i> <span>Xóa bài viết</span></a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="bi bi-box-arrow-right"></i> <span>Logout</span>
-                </a>
+                <a href="/views/home/index.php" class="nav-link"><i class="bi bi-box-arrow-right"></i> <span>Đăng xuất</span></a>
             </li>
         </ul>
     </nav>
@@ -152,85 +139,7 @@
     // Toggle sidebar
     document.getElementById("toggle-btn").addEventListener("click", function() {
         document.getElementById("sidebar").classList.toggle("active");
-    });
-</script>
-</body>
-</html>
-
-<div class="d-flex">
-    <!-- Sidebar -->
-    <nav id="sidebar" class="bg-dark">
-        <div class="p-3 d-flex justify-content-between">
-            <h5 class="mb-0">Admin Dashboard</h5>
-            <span id="toggle-btn">
-                    <i class="bi bi-list fs-4"></i>
-                </span>
-        </div>
-        <ul class="nav flex-column">
-            <li class="nav-item">
-                <a href="#" class="nav-link"><i class="bi bi-speedometer2 me-2"></i><span>Dashboard</span></a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link"><i class="bi bi-people me-2"></i><span>Manage Users</span></a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link"><i class="bi bi-newspaper me-2"></i><span>Add News</span></a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link"><i class="bi bi-gear me-2"></i><span>Settings</span></a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link"><i class="bi bi-box-arrow-right me-2"></i><span>Logout</span></a>
-            </li>
-        </ul>
-    </nav>
-
-    <!-- Main Content -->
-    <div id="content" class="p-4">
-        <h2>Latest News</h2>
-        <div class="row">
-            <!-- News Item 1 -->
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="https://via.placeholder.com/350x150" class="card-img-top" alt="News">
-                    <div class="card-body">
-                        <h5 class="card-title">News Title 1</h5>
-                        <p class="card-text">Short description for news 1...</p>
-                    </div>
-                </div>
-            </div>
-            <!-- News Item 2 -->
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="https://via.placeholder.com/350x150" class="card-img-top" alt="News">
-                    <div class="card-body">
-                        <h5 class="card-title">News Title 2</h5>
-                        <p class="card-text">Short description for news 2...</p>
-                    </div>
-                </div>
-            </div>
-            <!-- News Item 3 -->
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="https://via.placeholder.com/350x150" class="card-img-top" alt="News">
-                    <div class="card-body">
-                        <h5 class="card-title">News Title 3</h5>
-                        <p class="card-text">Short description for news 3...</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Bootstrap Bundle JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Bootstrap Icons -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-<!-- Custom Script -->
-<script>
-    document.getElementById("toggle-btn").addEventListener("click", function() {
-        document.getElementById("sidebar").classList.toggle("active");
+        document.getElementById("content").classList.toggle("active");
     });
 </script>
 </body>
