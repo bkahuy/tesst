@@ -8,10 +8,18 @@
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        .nav-link.default-active {
-            font-size: 1rem;
-            font-weight: bold;
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
         }
+
+        footer {
+            margin-top: auto;
+            padding: 10px 0;
+        }
+
         .card-text {
             display: -webkit-box;
             -webkit-line-clamp: 1;
@@ -31,6 +39,19 @@
             height: 100%;
             object-fit: cover;
         }
+
+        .div-nav {
+            width: 100%;
+            margin: 0px 18.25rem;
+        }
+        .search-btn {
+            width: 150px;
+        }
+        .searchNews {
+            margin-bottom: 0;
+            align-self: center;
+            margin-left: 3px;
+        }
     </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -44,35 +65,25 @@
 </header>
 
 <!-- Navigation Bar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto">
-
-                <li class="nav-item"><a class="nav-link default-active" href="#" onclick="filterArticles('all')">Tất cả tin mới</a></li>
-                <li class="nav-item"><a class="nav-link" href="#" onclick="filterArticles('sports')">Thể thao</a></li>
-                <li class="nav-item"><a class="nav-link" href="#" onclick="filterArticles('tech')">Công nghệ</a></li>
-                <li class="nav-item"><a class="nav-link" href="#" onclick="filterArticles('entertainment')">Giải trí</a></li>
-=======
-                <li class="nav-item"><a class="nav-link default-active" href="#">Tất cả tin mới</a></li>
-                <?php foreach ($categories as $category): ?>
-                    <li class="nav-item">
-                        <!-- Liên kết đến trang chi tiết của danh mục -->
-                        <a class="nav-link" href="?id=<?= $category->getId() ?>">
-                            <?= htmlspecialchars($category->getName()) ?>
-                        </a>
-                    </li>
-                <?php endforeach; ?>
-
-            </ul>
-        </div>
-        <div>
-            <a href="<?= DOMAIN.'views/admin/login.php' ?>" class="btn btn-primary">Đăng nhập</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-around">
+    <div class="d-flex justify-content-around div-nav">
+        <?php
+        $keyword = isset($_GET['keyword']) ? htmlspecialchars($_GET['keyword']) : '';
+        ?>
+        <form class="d-flex mx-2" role="search" method="GET">
+        <input class="form-control me-2" type="search" placeholder="Tìm kiếm..." value="<?php echo $keyword; ?>" name="keyword">
+        <button type="submit" href="#" class="btn btn-primary d-flex rounded-1 search-btn"><p value="searchNews">Tìm kiếm</p></button>
+        </form>
+        <div class="container d-flex justify-content-end"">
+            <div>
+                <a href="<?= DOMAIN.'views/admin/login.php' ?>" class="btn btn-primary d-flex mx-2 rounded-1"">Đăng nhập</a>
+            </div>
+            <div>
+                <a href="<?= DOMAIN.'views/admin/register.php' ?>" class="btn btn-primary d-flex px-4 rounded-1"">Đăng ký</a>
+            </div>
         </div>
     </div>
+
 </nav>
 
 <div class="container my-4">
@@ -81,7 +92,6 @@
         <div class="col-md-12">
             <div class="row g-4">
                 <?php
-
                 foreach($news as $new) {
                     ?>
                     <div class="col-md-6 col-lg-4 news-card" data-category="<?= $new->getCategoryId(); ?>">
@@ -92,27 +102,13 @@
                             <div class="card-body">
                                 <h5 class="card-title"> <?= $new->getTitle(); ?> </h5>
                                 <p class="card-text"><?=$new->getContent(); ?></p>
-                                <a href="#" class="btn btn-primary btn-sm">Read More</a>
+                                <a href="<?=DOMAIN.'views/news/detail.php'?>" class="btn btn-primary ">Xem chi tiết</a>
                             </div>
-=======
-                        foreach ($news as $new) {
-                ?>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card news-card shadow-sm">
-                        <div class="image-wrapper">
-                            <img src="<?= $new->getImage();?>" class="card-img-top img-fluid img-cropped" alt="News Image">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title"> <?= $new->getTitle(); ?> </h5>
-                            <p class="card-text"><?=$new->getContent(); ?></p>
-                            <a href="<?= DOMAIN.'?controller=new&id=' . $new->getId() . ';'?>" class="btn btn-primary btn-sm">Xem chi tiết</a>
-
                         </div>
                     </div>
                     <?php
                 }
                 ?>
-
             </div>
         </div>
     </div>
@@ -127,33 +123,5 @@
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    const filterArticles = (category) => {
-        const cards = document.querySelectorAll('.news-card');
-        cards.forEach(card => {
-            if (category === 'all' || card.dataset.category === category) {
-                card.style.display = 'block';
-            } else {
-                card.style.display = 'none';
-            }
-        });
-    };
-
-    const navLinks = document.querySelectorAll('.nav-link');
-
-    navLinks.forEach(link => {
-        link.addEventListener('click', function () {
-            navLinks.forEach(nav => {
-                nav.style.fontSize = '';
-                nav.style.fontWeight = '';
-                nav.classList.remove('default-active');
-            });
-
-            // Add style to clicked link
-            this.style.fontSize = '1rem';
-            this.style.fontWeight = 'bold';
-        });
-    });
-</script>
 </body>
 </html>

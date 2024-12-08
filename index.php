@@ -10,7 +10,7 @@ if ($controller == 'home') {
     require_once APP_ROOT.'/controllers/HomeController.php';
     $homeController = new HomeController();
     $homeController->index();
-    $categoryController = new HomeController();
+//    $categoryController = new HomeController();
 //    $categoryController->index();
 }
 else if ($controller == 'new') {
