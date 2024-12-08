@@ -22,12 +22,16 @@
         display: flex;
         flex-direction: column;
         min-height: 100vh;
-        margin: 0;
+        margin: 0 ;
     }
 
     footer {
         margin-top: auto;
         padding: 10px 0;
+    }
+
+    .shadow-sm {
+        margin-bottom: 50px;
     }
 </style>
 

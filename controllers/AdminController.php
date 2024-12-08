@@ -1,5 +1,6 @@
 <?php
-require_once APP_ROOT . '/models/Admin.php';
+require_once __DIR__.'/../models/Admin.php';
+require_once __DIR__.'/../views/index.php';
 
 class AdminController {
     private $userModel;
@@ -9,53 +10,61 @@ class AdminController {
     }
 
     // Hiển thị form đăng ký
-    public function registerForm() {
-        require_once APP_ROOT . '/views/admin/register.php';
-    }
-
-    // Xử lý đăng ký
-    public function register() {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-            $role = $_POST['role'];
-
-            $result = $this->userModel->register($username, $password, $role);
-
-            if ($result) {
-                header("Location: " . DOMAIN . "index.php?controller=user&action=loginForm");
-            } else {
-                echo "Đăng ký thất bại!";
-            }
-        }
-    }
+//    public function registerForm() {
+//        require_once APP_ROOT . '/views/admin/register.php';
+//    }
+//
+//    // Xử lý đăng ký
+//    public function register() {
+//        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+//            $username = $_POST['username'];
+//            $password = $_POST['password'];
+//            $role = $_POST['role'];
+//
+//            $result = $this->userModel->register($username, $password, $role);
+//
+//            if ($result) {
+//                header("Location: " . DOMAIN . "index.php?controller=user&action=loginForm");
+//            } else {
+//                echo "Đăng ký thất bại!";
+//            }
+//        }
+//    }
 
     // Hiển thị form đăng nhập
     public function loginForm() {
-        require_once APP_ROOT . '/views/admin/login.php';
+        include __DIR__.'/../views/admin/login.php';
     }
 
     // Xử lý đăng nhập
-    public function login() {
+    public function login(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $username = $_POST['username'];
-            $password = $_POST['password'];
+            if (isset($_POST['signIn']) && $_POST['signIn'] === 'login') {
+                if (isset($_POST['username'], $_POST['password'])) {
 
-            $user = $this->userModel->login($username, $password);
+                    $username = $_POST['username'];
+                    $password = $_POST['password'];
+                    echo $username;
+                    // Gọi phương thức login để kiểm tra thông tin người dùng
+                    $result = User::login($username, $password);
 
-            if ($user) {
-                session_start();
-                $_SESSION['user_id'] = $user['id'];
-                $_SESSION['username'] = $user['username'];
-                $_SESSION['role'] = $user['role'];
+                    if ($result) {
+                        // Đăng nhập thành công, lưu thông tin người dùng vào session
+                        session_start();
+                        $_SESSION['user'] = $result['username']; // Lưu thông tin người dùng vào session
 
-                if ($user['role'] == 1) {
-                    header("Location: " . DOMAIN . "index.php?controller=admin&action=index"); // Admin Dashboard
-                } else {
-                    header("Location: " . DOMAIN . "index.php?controller=home&action=index"); // User Home
+                        // Kiểm tra quyền của người dùng
+                        if ($result['role'] == 1) {
+                            echo 'Quản trị viên';// Quản trị viên
+                            header("Location: index.php?controller=user&action=index");
+                        } else {
+                            echo header("khách");
+                            header("Location: index.php?controller=home&action=index");
+                        }
+                    } else {
+                        echo "Đăng nhập thất bại!";
+                    }
                 }
-            } else {
-                echo "Đăng nhập thất bại!";
             }
         }
     }
