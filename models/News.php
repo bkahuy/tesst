@@ -6,20 +6,16 @@ class News{
     private $image;
     private $created_at;
     private $category_name;
+    private $category_id;
 
-    public function __construct($id, $title, $content, $image, $created_at, $category_name)
+    public function __construct($id, $title, $content, $image, $created_at, $category_id)
     {
         $this->id = $id;
         $this->title = $title;
         $this->content = $content;
         $this->image = $image;
         $this->created_at = $created_at;
-        $this->category_name = $category_name;
-    }
-
-    public function getContent()
-    {
-        return $this->content;
+        $this->category_id = $category_id;
     }
 
     public function getId()
@@ -30,6 +26,11 @@ class News{
     public function getTitle()
     {
         return $this->title;
+    }
+
+    public function getContent()
+    {
+        return $this->content;
     }
 
     public function getImage()
@@ -47,6 +48,11 @@ class News{
         return $this->category_name;
     }
 
+    public function getCategoryId()
+    {
+        return $this->category_id;
+    }
+
     public function setId($id): void
     {
         $this->id = $id;
@@ -57,14 +63,14 @@ class News{
         $this->title = $title;
     }
 
-    public function setContent($content): void
-    {
-        $this->content = $content;
-    }
-
     public function setImage($image): void
     {
         $this->image = $image;
+    }
+
+    public function setContent($content): void
+    {
+        $this->content = $content;
     }
 
     public function setCreatedAt($created_at): void
@@ -75,6 +81,11 @@ class News{
     public function setCategoryName($category_name): void
     {
         $this->category_name = $category_name;
+    }
+
+    public function setCategoryId($category_id): void
+    {
+        $this->category_id = $category_id;
     }
 
 

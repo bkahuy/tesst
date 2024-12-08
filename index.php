@@ -11,7 +11,7 @@ if ($controller == 'home') {
     $homeController = new HomeController();
     $homeController->index();
     $categoryController = new HomeController();
-    $categoryController->index();
+//    $categoryController->index();
 }
 else if ($controller == 'new') {
     require_once APP_ROOT.'/controllers/NewsController.php';
@@ -19,9 +19,4 @@ else if ($controller == 'new') {
     $newController->detail();
 }
 
-//else if ($action == 'new') {
-//    require_once APP_ROOT.'/controllers/NewsController.php';
-//    $newController = new NewsController();
-//    $newController->detail();
-//}
 

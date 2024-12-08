@@ -1,6 +1,6 @@
 <?php
 
-require_once 'config/DBConnection.php';
+
 class Admin{
     private $conn;
     private $table = 'admin';
