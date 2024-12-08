@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,10 +51,22 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
+
                 <li class="nav-item"><a class="nav-link default-active" href="#" onclick="filterArticles('all')">Tất cả tin mới</a></li>
                 <li class="nav-item"><a class="nav-link" href="#" onclick="filterArticles('sports')">Thể thao</a></li>
                 <li class="nav-item"><a class="nav-link" href="#" onclick="filterArticles('tech')">Công nghệ</a></li>
                 <li class="nav-item"><a class="nav-link" href="#" onclick="filterArticles('entertainment')">Giải trí</a></li>
+=======
+                <li class="nav-item"><a class="nav-link default-active" href="#">Tất cả tin mới</a></li>
+                <?php foreach ($categories as $category): ?>
+                    <li class="nav-item">
+                        <!-- Liên kết đến trang chi tiết của danh mục -->
+                        <a class="nav-link" href="?id=<?= $category->getId() ?>">
+                            <?= htmlspecialchars($category->getName()) ?>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+
             </ul>
         </div>
         <div>
@@ -68,6 +81,7 @@
         <div class="col-md-12">
             <div class="row g-4">
                 <?php
+
                 foreach($news as $new) {
                     ?>
                     <div class="col-md-6 col-lg-4 news-card" data-category="<?= $new->getCategoryId(); ?>">
@@ -80,6 +94,19 @@
                                 <p class="card-text"><?=$new->getContent(); ?></p>
                                 <a href="#" class="btn btn-primary btn-sm">Read More</a>
                             </div>
+=======
+                        foreach ($news as $new) {
+                ?>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card news-card shadow-sm">
+                        <div class="image-wrapper">
+                            <img src="<?= $new->getImage();?>" class="card-img-top img-fluid img-cropped" alt="News Image">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title"> <?= $new->getTitle(); ?> </h5>
+                            <p class="card-text"><?=$new->getContent(); ?></p>
+                            <a href="<?= DOMAIN.'?controller=new&id=' . $new->getId() . ';'?>" class="btn btn-primary btn-sm">Xem chi tiết</a>
+
                         </div>
                     </div>
                     <?php
