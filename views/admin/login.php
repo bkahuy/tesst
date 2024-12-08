@@ -33,6 +33,12 @@
 <body>
 <div class="login-container">
     <h3>Đăng Nhập</h3>
+    <?php if (isset($error)) { ?>
+        <div class="error-message">
+            <?php echo $error; ?>
+        </div>
+    <?php } ?>
+
         <div class="mb-3">
             <label for="username" class="form-label">Tên tài khoản</label>
             <input type="text" class="form-control" name="username" placeholder="Username" required>
