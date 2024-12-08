@@ -27,7 +27,7 @@ class NewsService{
                     FROM news 
                     INNER JOIN categories 
                     ON news.category_id = categories.id
-                    WHERE news.id = :id;";
+                    WHERE news.category_id = :id";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
