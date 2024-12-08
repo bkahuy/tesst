@@ -22,7 +22,7 @@
                         <div class="card-body">
                             <h5 class="card-title"><?php echo htmlspecialchars($news['title']); ?></h5>
                             <p class="card-text"><?php echo htmlspecialchars($news['content']); ?></p>
-                            <a href="index.php?action=viewNews&id=<?php echo $news['id']; ?>" class="btn btn-primary">Chi tiết</a>
+                            <a href="<?=DOMAIN?>?action=viewNews&id=<?php echo $news['id']; ?>" class="btn btn-primary">Chi tiết</a>
                         </div>
                     </div>
                 </div>

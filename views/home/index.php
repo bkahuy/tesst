@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple News Page</title>
+    <title>Báo đơn giản</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -52,6 +52,9 @@
             align-self: center;
             margin-left: 3px;
         }
+        .search{
+            margin-bottom: 0;
+        }
     </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -72,14 +75,11 @@
         ?>
         <form class="d-flex mx-2" role="search" method="GET">
         <input class="form-control me-2" type="search" placeholder="Tìm kiếm..." value="<?php echo $keyword; ?>" name="keyword">
-        <button type="submit" href="#" class="btn btn-primary d-flex rounded-1 search-btn"><p value="searchNews">Tìm kiếm</p></button>
+        <button type="submit" href="#" class="btn btn-primary d-flex rounded-1 search-btn searchNews" value="searchNews"><p class="search">Tìm kiếm</p></button>
         </form>
         <div class="container d-flex justify-content-end"">
             <div>
                 <a href="<?= DOMAIN.'views/admin/login.php' ?>" class="btn btn-primary d-flex mx-2 rounded-1"">Đăng nhập</a>
-            </div>
-            <div>
-                <a href="<?= DOMAIN.'views/admin/register.php' ?>" class="btn btn-primary d-flex px-4 rounded-1"">Đăng ký</a>
             </div>
         </div>
     </div>
@@ -102,7 +102,7 @@
                             <div class="card-body">
                                 <h5 class="card-title"> <?= $new->getTitle(); ?> </h5>
                                 <p class="card-text"><?=$new->getContent(); ?></p>
-                                <a href="<?=DOMAIN.'views/news/detail.php'?>" class="btn btn-primary ">Xem chi tiết</a>
+                                <a href="<?= DOMAIN.'?controller=new&id=' . $new->getId() . ';'?>" class="btn btn-primary ">Xem chi tiết</a>
                             </div>
                         </div>
                     </div>
