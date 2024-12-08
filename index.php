@@ -18,3 +18,10 @@ else if ($controller == 'new') {
     $newController = new NewsController();
     $newController->detail();
 }
+
+//else if ($action == 'new') {
+//    require_once APP_ROOT.'/controllers/NewsController.php';
+//    $newController = new NewsController();
+//    $newController->detail();
+//}
+
