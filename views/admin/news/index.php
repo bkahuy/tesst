@@ -90,11 +90,11 @@
             <?php
             foreach($news as $new) {
             ?>
-                    <tr>
-                        <td><?=$new->getId(); ?></td>
-                        <td><?= $new->getTitle(); ?></td>
-                        <td><?=$new->getContent(); ?></td>
-                        <td><?=$new->getImage(); ?></td>
+                    <tr data-index="<?= $new['id'] ?>">
+                        <td><?= htmlspecialchars($new['name']) ?></td>
+                        <td><?= htmlspecialchars($new['title']) ?></td>
+                        <td><?= htmlspecialchars($new['content']) ?></td>
+                        <td><img src="<?= htmlspecialchars($new['image']) ?>" alt="<?= htmlspecialchars($new['image']) ?>"</td>
                         <td><?=$new->getCreatedAt(); ?></td>
                     </tr>
                 <?php
@@ -216,7 +216,7 @@
                             <option value="3">Bài viết 3</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-danger">Xóa bài viết</button>
+                    <button type="submit" class="btn btn-danger" name="signIn">Xóa bài viết</button>
                 </form>
             </div>
         </div>
