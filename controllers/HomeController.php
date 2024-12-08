@@ -7,6 +7,7 @@ class HomeController{
         $news = $newService->getAllNews();
         //render du lieu ra homepage
         include APP_ROOT.'/views/home/index.php';
+        include APP_ROOT.'/views/admin/news/index.php';
     }
 
 }
