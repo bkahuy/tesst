@@ -102,7 +102,7 @@
                             <div class="card-body">
                                 <h5 class="card-title"> <?= $new->getTitle(); ?> </h5>
                                 <p class="card-text"><?=$new->getContent(); ?></p>
-                                <a href="<?=DOMAIN.'views/news/detail.php'?>" class="btn btn-primary ">Xem chi tiết</a>
+                                <a href="<?= DOMAIN.'?controller=new&id=' . $new->getId() . ';'?>" class="btn btn-primary ">Xem chi tiết</a>
                             </div>
                         </div>
                     </div>

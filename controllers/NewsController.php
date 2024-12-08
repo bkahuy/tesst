@@ -6,11 +6,11 @@ class NewsController{
         $newService = new NewsService();
         $newsbyid = $newService->getNewsById($_GET['id']);
         //render du lieu ra homepage
-        include APP_ROOT.'/views/news/detail.php';
+        include APP_ROOT.'/views/News/detail.php';
     }
     public function searchNews($keyword)
     {
         $searchResults = $this->news->searchNews($keyword);
-        include 'views/News/search.php';  // Hiển thị kết quả tìm kiếm trong view
+        include '../views/News/search.php';  // Hiển thị kết quả tìm kiếm trong view
     }
 }
