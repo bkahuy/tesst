@@ -14,7 +14,8 @@
 <!-- Header -->
 <header class="bg-primary text-white py-3">
     <div class="container text-center">
-        <h1 class="mb-0">Chi Tiết Bài Báo</h1>
+        <h1><a href="<?= DOMAIN; ?>" class="text-white text-decoration-none">Chi Tiết Bài Báo</a></h1>
+        <p><a href="<?= DOMAIN; ?>" class="text-white text-decoration-none">Ấn để về trang chủ</a></p>
     </div>
 </header>
 <style>
