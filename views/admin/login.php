@@ -1,5 +1,26 @@
 <?php
+session_start();
+require 'db_config.php';
 
+
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    /** @var TYPE_NAME $pdo */
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE username = :username");
+    $stmt->execute(['username' => $username]);
+    $admin = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if($admin && password_verify($password, $admin['password'])){
+        $_SESSION['admin'] = $admin;
+        $_SESSION['username'] = $username;
+        header('Location: index.php');
+        exit;
+    }else{
+        $error = "Wrong username or password";
+    }
+}
 ?>
 
 <!DOCTYPE html>
