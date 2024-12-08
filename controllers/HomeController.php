@@ -13,6 +13,7 @@ class HomeController{
         $categories = $categoryService->getAllCategories();
         //render du lieu ra homepage
         include APP_ROOT.'/views/home/index.php';
+        include APP_ROOT.'/views/admin/news/index.php';
     }
 
 }

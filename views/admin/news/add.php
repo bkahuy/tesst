@@ -77,7 +77,7 @@
                 <a href="delete.php" class="nav-link" data-bs-toggle="tab"><i class="bi bi-trash"></i> <span>Xóa bài viết</span></a>
             </li>
             <li class="nav-item">
-                <a href="/views/home/index.php" class="nav-link"><i class="bi bi-box-arrow-right"></i> <span>Đăng xuất</span></a>
+                <a href="#" class="nav-link"><i class="bi bi-box-arrow-right"></i> <span>Đăng xuất</span></a>
             </li>
         </ul>
     </nav>
@@ -87,7 +87,7 @@
         <div class="tab-content">
             <!-- Thêm bài viết -->
             <div class="tab-pane fade show active" id="addPost">
-                <h2>Thêm Bài Viết</h2>
+                <h2 class="mb-4">Thêm Bài Viết</h2>
                 <form id="addPostForm" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="title" class="form-label">Tiêu đề bài viết</label>
@@ -98,8 +98,8 @@
                         <textarea class="form-control" id="content" rows="5" placeholder="Nhập nội dung bài viết" oninput="autoResize(this)"></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="image" class="form-label">Tải ảnh bài viết</label>
-                        <input type="file" class="form-control" id="image" name="image">
+                        <label for="image" class="form-label">Nhập đường dẫn ảnh bài viết</label>
+                        <input type="text" class="form-control" id="image" name="image" placeholder="Nhập URL của ảnh bài viết">
                     </div>
                     <div class="mb-3">
                         <label for="category" class="form-label">Chọn phân loại bài viết</label>
@@ -131,30 +131,6 @@
         textarea.style.height = 'auto'; // Đặt chiều cao về auto trước khi tính lại chiều cao
         textarea.style.height = (textarea.scrollHeight) + 'px'; // Điều chỉnh chiều cao theo nội dung
     }
-
-    // AJAX form submission
-    document.getElementById("addPostForm").addEventListener("submit", function(event) {
-        event.preventDefault();
-
-        const formData = new FormData(this);
-
-        fetch('upload_post.php', {
-            method: 'POST',
-            body: formData
-        })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById("responseMessage").innerHTML = data.message;
-                if (data.success) {
-                    // Optionally reset the form
-                    document.getElementById("addPostForm").reset();
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                document.getElementById("responseMessage").innerHTML = 'Có lỗi xảy ra!';
-            });
-    });
 </script>
 </body>
 </html>
