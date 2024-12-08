@@ -11,12 +11,34 @@ class CategoryService{
             $stmt = $conn->query($sql);
 
             // buoc 3 xu ly ket qua tra ve
-            $categories = [];
-            while ($row = $stmt->fetch()) {
-                $category = new Category($row['id'], $row['NAME']);
-                $categories[] = $category;
+            if ($stmt->rowCount() > 0) {
+                $categories = [];
+                while ($row = $stmt->fetch()) {
+                    $category = new Category($row['id'], $row['NAME']);
+                    $categories[] = $category;
+                }
+                return $categories;
             }
-            return $categories;
+        }
+    }
+    public function getCategoryById($id){
+        $dbConnection = new DBConnection();
+        $conn = $dbConnection->getConn();
+        if($conn != null) {
+            $sql = "SELECT * FROM categories WHERE id = :id";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                $categoriesbyid = [];
+                while ($row = $stmt->fetch()) {
+                    $categorybyid = new Category($row['id'], $row['name']);
+                    $categoriesbyid[] = $categorybyid;
+                }
+                return $categoriesbyid;
+            } else {
+                return [];
+            }
         }
     }
 
