@@ -49,7 +49,7 @@
             </ul>
         </div>
         <div>
-            <a href="<?= DOMAIN.'views/admin/login.php' ?>" class="btn btn-primary">Log In</a>
+            <a href="<?= DOMAIN.'views/admin/login.php' ?>" class="btn btn-primary">Đăng nhập</a>
         </div>
     </div>
 </nav>
