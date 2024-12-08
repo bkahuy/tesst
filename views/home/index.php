@@ -85,7 +85,7 @@
             </form>
         <div class="container d-flex justify-content-end"">
             <div>
-                <a href="<?= DOMAIN.'views/admin/login.php' ?>" class="btn btn-primary d-flex mx-2 rounded-1"">Đăng nhập</a>
+                <a href="<?= DOMAIN.'views/admin/login.php' ?>" class="btn btn-primary d-flex mx-2 rounded-1">Đăng nhập</a>
             </div>
         </div>
     </div>

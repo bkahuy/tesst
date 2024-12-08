@@ -48,7 +48,7 @@
     </style>
 </head>
 <body>
-
+<form method="dialog" action="index.php"></form>
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
@@ -88,32 +88,21 @@
         </thead>
         <tbody>
             <?php
-            foreach($news as $new) {
+                foreach ($admins as $admin) {
             ?>
-                    <tr data-index="<?= $new['id'] ?>">
-                        <td><?= htmlspecialchars($new['name']) ?></td>
-                        <td><?= htmlspecialchars($new['title']) ?></td>
-                        <td><?= htmlspecialchars($new['content']) ?></td>
-                        <td><img src="<?= htmlspecialchars($new['image']) ?>" alt="<?= htmlspecialchars($new['image']) ?>"</td>
-                        <td><?=$new->getCreatedAt(); ?></td>
+                    <tr data-index="<?= $admin->getId(); ?>">
+                        <td><?= $admin->getTitle(); ?></td>
+                        <td><?= $admin->getContent ?></td>
+                        <td><img src="<?= $admin->getImage(); ?>" alt=""</td>
+                        <td><?=$admin->getCreatedAt(); ?></td>
                     </tr>
-                <?php
+            <?php
+
             }
             ?>
         </tbody>
     </table>
 
-    <!-- Hiển thị điều hướng phân trang -->
-    <!--    <div class="page">-->
-    <!--        --><?php //if ($total_pages > 1): ?>
-    <!--            --><?php //for ($i = 1; $i <= $total_pages; $i++): ?>
-    <!--                <a href="?page=--><?php //echo $i; ?><!--"-->
-    <!--                   style="--><?php //echo $i == $page ? 'font-weight:bold;color:red;padding:20px' : ''; ?><!--">-->
-    <!--                    --><?php //echo $i; ?>
-    <!--                </a>-->
-    <!--            --><?php //endfor; ?>
-    <!--        --><?php //endif; ?>
-    <!--    </div>-->
 </div>
 
 <!-- Modal Thêm Bài Viết -->
