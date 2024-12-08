@@ -1,236 +1,240 @@
 <?php
-
 ?>
 
-
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <!-- Bootstrap CSS -->
+    <title>Quản Lý Bài Viết</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f8f9fa;
-            overflow-x: hidden;
         }
-        /* Sidebar Styling */
-        #sidebar {
-            min-width: 250px;
-            max-width: 250px;
-            height: 100vh;
-            background-color: #343a40;
-            color: #fff;
-            transition: all 0.3s ease;
-            overflow: hidden;
+        .modal-backdrop.show {
+            opacity: 0.5;
         }
-        #sidebar.active {
-            min-width: 80px;
-            max-width: 80px;
+        .container {
+            text-align: center;
         }
-        #sidebar.active .nav-link span {
-            display: none;
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
         }
-        #sidebar.active .nav-link i {
-            margin-right: 0;
-            font-size: 1.2rem;
+        i{
+            color: blue;
         }
-        #sidebar .nav-link {
-            color: #fff;
-            padding: 10px 15px;
-            white-space: nowrap; /* Ngăn text bị xuống dòng */
+        .title{
+            color: blue;
+            justify-content: center;
         }
-        #sidebar .nav-link i {
-            margin-right: 10px;
-            font-size: 1.2rem;
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
         }
-        #sidebar h5 {
-            font-size: 1.2rem;
-            margin-left: 15px;
+        ul, li{
+            display: inline-block;
+            list-style-type: none;
         }
-        #sidebar.active h5 {
-            display: none;
-        }
-        #content {
-            transition: margin-left 0.3s ease;
-            width: 100%;
-        }
-        #sidebar.active + #content {
-            margin-left: 80px;
-        }
-        #toggle-btn {
-            cursor: pointer;
-            color: #fff;
-            font-size: 1.5rem;
-        }
-        .card {
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        .page{
+            display: inline-block ;
+            margin-left: 40%;
         }
     </style>
 </head>
 <body>
-<div class="d-flex">
-    <!-- Sidebar -->
-    <nav id="sidebar" class="bg-dark">
-        <div class="p-3 d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Admin Dashboard</h5>
-            <span id="toggle-btn">
-                    <i class="bi bi-list"></i>
-                </span>
-        </div>
-        <ul class="nav flex-column">
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="bi bi-people"></i> <span>Manage Users</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="bi bi-newspaper"></i> <span>News Management</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="bi bi-gear"></i> <span>Settings</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="bi bi-box-arrow-right"></i> <span>Logout</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
 
-    <!-- Main Content -->
-    <div id="content" class="p-4">
-        <h2 class="mb-4">Latest News</h2>
-        <div class="row">
-            <!-- News Item 1 -->
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="https://via.placeholder.com/350x150" class="card-img-top" alt="News">
-                    <div class="card-body">
-                        <h5 class="card-title">News Title 1</h5>
-                        <p class="card-text">Short description for news 1...</p>
-                    </div>
-                </div>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Quản Lý Bài Viết</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <button class="btn btn-danger" id="logoutBtn">Đăng xuất</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container mt-3">
+    <h2>Quản Lý Bài Viết</h2>
+    <div class="action-buttons">
+        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addPostModal">Thêm Bài Viết</button>
+        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editPostModal">Sửa Bài Viết</button>
+        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletePostModal">Xóa Bài Viết</button>
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Nội dung</th>
+            <th>Ảnh</th>
+            <th>Ngày đăng</th>
+        </tr>
+        </thead>
+        <tbody>
+            <?php
+            foreach($news as $new) {
+            ?>
+                    <tr>
+                        <td><?=$new->getId(); ?></td>
+                        <td><?= $new->getTitle(); ?></td>
+                        <td><?=$new->getContent(); ?></td>
+                        <td><?=$new->getImage(); ?></td>
+                        <td><?=$new->getCreatedAt(); ?></td>
+                    </tr>
+                <?php
+            }
+            ?>
+        </tbody>
+    </table>
+
+    <!-- Hiển thị điều hướng phân trang -->
+    <!--    <div class="page">-->
+    <!--        --><?php //if ($total_pages > 1): ?>
+    <!--            --><?php //for ($i = 1; $i <= $total_pages; $i++): ?>
+    <!--                <a href="?page=--><?php //echo $i; ?><!--"-->
+    <!--                   style="--><?php //echo $i == $page ? 'font-weight:bold;color:red;padding:20px' : ''; ?><!--">-->
+    <!--                    --><?php //echo $i; ?>
+    <!--                </a>-->
+    <!--            --><?php //endfor; ?>
+    <!--        --><?php //endif; ?>
+    <!--    </div>-->
+</div>
+
+<!-- Modal Thêm Bài Viết -->
+<div class="modal fade" id="addPostModal" tabindex="-1" aria-labelledby="addPostModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addPostModalLabel">Thêm Bài Viết</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <!-- News Item 2 -->
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="https://via.placeholder.com/350x150" class="card-img-top" alt="News">
-                    <div class="card-body">
-                        <h5 class="card-title">News Title 2</h5>
-                        <p class="card-text">Short description for news 2...</p>
+            <div class="modal-body">
+                <form id="addPostForm">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Tiêu đề bài viết</label>
+                        <input type="text" class="form-control" id="title" placeholder="Nhập tiêu đề bài viết" required>
                     </div>
-                </div>
-            </div>
-            <!-- News Item 3 -->
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="https://via.placeholder.com/350x150" class="card-img-top" alt="News">
-                    <div class="card-body">
-                        <h5 class="card-title">News Title 3</h5>
-                        <p class="card-text">Short description for news 3...</p>
+                    <div class="mb-3">
+                        <label for="content" class="form-label">Nội dung bài viết</label>
+                        <textarea class="form-control" id="content" rows="3" placeholder="Nhập nội dung bài viết" required></textarea>
                     </div>
-                </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">URL Ảnh Thumbnail</label>
+                        <input type="url" class="form-control" id="image" placeholder="Nhập URL ảnh thumbnail" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Chọn phân loại bài viết</label>
+                        <select class="form-control" id="category" required>
+                            <option value="sports">Thể thao</option>
+                            <option value="tech">Công nghệ</option>
+                            <option value="entertainment">Giải trí</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Thêm bài viết</button>
+                </form>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Bootstrap Bundle JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Bootstrap Icons -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-<script>
-    // Toggle sidebar
-    document.getElementById("toggle-btn").addEventListener("click", function() {
-        document.getElementById("sidebar").classList.toggle("active");
-    });
-</script>
-</body>
-</html>
-
-<div class="d-flex">
-    <!-- Sidebar -->
-    <nav id="sidebar" class="bg-dark">
-        <div class="p-3 d-flex justify-content-between">
-            <h5 class="mb-0">Admin Dashboard</h5>
-            <span id="toggle-btn">
-                    <i class="bi bi-list fs-4"></i>
-                </span>
-        </div>
-        <ul class="nav flex-column">
-            <li class="nav-item">
-                <a href="#" class="nav-link"><i class="bi bi-speedometer2 me-2"></i><span>Dashboard</span></a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link"><i class="bi bi-people me-2"></i><span>Manage Users</span></a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link"><i class="bi bi-newspaper me-2"></i><span>Add News</span></a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link"><i class="bi bi-gear me-2"></i><span>Settings</span></a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link"><i class="bi bi-box-arrow-right me-2"></i><span>Logout</span></a>
-            </li>
-        </ul>
-    </nav>
-
-    <!-- Main Content -->
-    <div id="content" class="p-4">
-        <h2>Latest News</h2>
-        <div class="row">
-            <!-- News Item 1 -->
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="https://via.placeholder.com/350x150" class="card-img-top" alt="News">
-                    <div class="card-body">
-                        <h5 class="card-title">News Title 1</h5>
-                        <p class="card-text">Short description for news 1...</p>
-                    </div>
-                </div>
+<!-- Modal Sửa Bài Viết -->
+<div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editPostModalLabel">Sửa Bài Viết</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <!-- News Item 2 -->
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="https://via.placeholder.com/350x150" class="card-img-top" alt="News">
-                    <div class="card-body">
-                        <h5 class="card-title">News Title 2</h5>
-                        <p class="card-text">Short description for news 2...</p>
+            <div class="modal-body">
+                <form id="editPostForm">
+                    <div class="mb-3">
+                        <label for="selectPost" class="form-label">Chọn bài viết muốn sửa</label>
+                        <select class="form-control" id="selectPost">
+                            <option value="1">Bài viết 1</option>
+                            <option value="2">Bài viết 2</option>
+                            <option value="3">Bài viết 3</option>
+                        </select>
                     </div>
-                </div>
-            </div>
-            <!-- News Item 3 -->
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="https://via.placeholder.com/350x150" class="card-img-top" alt="News">
-                    <div class="card-body">
-                        <h5 class="card-title">News Title 3</h5>
-                        <p class="card-text">Short description for news 3...</p>
+                    <div class="mb-3">
+                        <label for="editTitle" class="form-label">Tiêu đề bài viết</label>
+                        <input type="text" class="form-control" id="editTitle" placeholder="Nhập tiêu đề bài viết" required>
                     </div>
-                </div>
+                    <div class="mb-3">
+                        <label for="editContent" class="form-label">Nội dung bài viết</label>
+                        <textarea class="form-control" id="editContent" rows="3" placeholder="Nhập nội dung bài viết" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editImage" class="form-label">URL Ảnh Thumbnail</label>
+                        <input type="url" class="form-control" id="editImage" placeholder="Nhập URL ảnh thumbnail" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editCategory" class="form-label">Chọn phân loại bài viết</label>
+                        <select class="form-control" id="editCategory" required>
+                            <option value="sports">Thể thao</option>
+                            <option value="tech">Công nghệ</option>
+                            <option value="entertainment">Giải trí</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-warning">Cập nhật bài viết</button>
+                </form>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Bootstrap Bundle JS -->
+<!-- Modal Xóa Bài Viết -->
+<div class="modal fade" id="deletePostModal" tabindex="-1" aria-labelledby="deletePostModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deletePostModalLabel">Xóa Bài Viết</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="deletePostForm">
+                    <div class="mb-3">
+                        <label for="deletePostSelect" class="form-label">Chọn bài viết muốn xóa</label>
+                        <select class="form-control" id="deletePostSelect">
+                            <option value="1">Bài viết 1</option>
+                            <option value="2">Bài viết 2</option>
+                            <option value="3">Bài viết 3</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-danger">Xóa bài viết</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- Bootstrap JS Bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Bootstrap Icons -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-<!-- Custom Script -->
+
 <script>
-    document.getElementById("toggle-btn").addEventListener("click", function() {
-        document.getElementById("sidebar").classList.toggle("active");
+    // Đóng modal khi nhấn vào ngoài modal hoặc nhấn nút "X"
+    document.querySelectorAll('.btn-close').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const modal = btn.closest('.modal');
+            const modalInstance = bootstrap.Modal.getInstance(modal);
+            modalInstance.hide();
+        });
     });
 </script>
 </body>
