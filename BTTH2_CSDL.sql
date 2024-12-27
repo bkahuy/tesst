@@ -86,4 +86,4 @@ insert into news (title, content, image, created_at, category_id) values ('Libra
 
 Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', 'https://photo2.tinhte.vn/data/attachment-files/2021/03/5395399_hinh-nen-girl-xinh-4k-cho-pc-02.jpg', '2024-09-21', 3);             
 
-SELECT news.*, categories.name AS category_name FROM news INNER JOIN categories ON news.category_id = categories.id WHERE news.category_id =2
+SELECT news.*, categories.name AS category_name FROM news INNER JOIN categories ON news.category_id = categories.id WHERE news.category_id =0

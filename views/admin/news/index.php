@@ -48,7 +48,7 @@
     </style>
 </head>
 <body>
-<form method="dialog" action="index.php"></form>
+<form method="" action=""></form>
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
@@ -60,7 +60,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <button class="btn btn-danger" id="logoutBtn">Đăng xuất</button>
+                    <h1><a href="<?= DOMAIN; ?>" class="text-white text-decoration-none">Đăng Xuất</a></h1>
                 </li>
             </ul>
         </div>
